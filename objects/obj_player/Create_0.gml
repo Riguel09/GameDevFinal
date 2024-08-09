@@ -9,10 +9,10 @@ falling_gravity = 1;
 falling_max_velocity = 7;
 
 jump_acceleration = 2;
-jump_initial_inpulse = 4;
-jump_max_velocity = 10;
+jump_initial_inpulse = 2;
+jump_max_velocity = 7;
 jump_timer = 0;
-jump_duration = 20;
+jump_duration = 15;
 
 bounce_timer = 0;
 bounce_initial_impulse = 4;
@@ -28,6 +28,7 @@ shake_duration = 0;
 shake_time = 0;
 
 dead = false;
+
 
 function screen_shake(magnitude, duration){
 	shake_magnitude = magnitude;
