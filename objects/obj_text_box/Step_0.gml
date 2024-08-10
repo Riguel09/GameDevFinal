@@ -1,12 +1,10 @@
-show_debug_message(page)
-if(keyboard_check(vk_enter)){
+if(keyboard_check_pressed(vk_enter)){
 	if(page + 1 < array_length_1d(msg)){
-
-		page++;
+		page += 1;
 	}
 	else{
-		instance_destroy()
 		page = 0;
+		instance_destroy()
 	}
 }
 

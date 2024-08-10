@@ -8,31 +8,18 @@ if (falling == true) {
     vertical_velocity += falling_gravity;
     if (vertical_velocity > falling_max_velocity) vertical_velocity = falling_max_velocity;
 
-    var vertical_check = 10;
+    var vertical_check = 5;
 
     if (vertical_velocity > 0) { // Moving downwards
         if (place_meeting(x, y + vertical_check, obj_ground)) {
             vertical_velocity = 0;
             
             var floor_instance = instance_place(x, y + vertical_check, obj_ground);
-            y = floor_instance.y - sprite_height;
+            y -= vertical_check
             
             falling = false;
             on_floor = true;
-        } else if (place_meeting(x, y + vertical_check, obj_enemy)) {
-            var enemy_instance = instance_place(x, y + vertical_check, obj_enemy);
-            vertical_velocity = -bounce_initial_impulse; // Bounce effect
-            bouncing = true;
-            bounce_timer = 0;
-            
-            // Create particles and screen shake effect
-			audio_play_sound(snd_bounce, false, false);
-            var ps = part_system_create();
-            part_particles_create(ps, x, y + 72, global.particle_type, 100);
-            screen_shake(5, 30);
-            screen_flash();
-            instance_destroy(enemy_instance); // Destroy enemy
-        }
+        } 
     } else { // Moving upwards
         if (place_meeting(x, y + vertical_velocity, obj_ground)) {
             vertical_velocity = 0;
@@ -94,23 +81,13 @@ if (bouncing == true) {
 }
 
 // Apply horizontal movement and handle wall collisions
-if (place_meeting(x + horizontal_velocity, y, obj_ground)) {
-    while (!place_meeting(x + sign(horizontal_velocity), y, obj_ground)) {
-        x += sign(horizontal_velocity); // Move until collision
-    }
-    horizontal_velocity = 0; // Stop movement on collision
-    if (falling || jumping || bouncing) {
-        sprite_index = spr_fall; // Set fall sprite if in the air
-    } else {
-        sprite_index = spr_idle; // Set idle sprite on ground collision
-    }
-}
+
 
 // Ensure player stays within the room boundaries
 if (x < 0) {
     x = 0;
-} else if (x > room_width - sprite_width) {
-    x = room_width - sprite_width;
+} else if (x > room_width - sprite_width/2) {
+    x = room_width - sprite_width/2;
 }
 if (y < 0) {
     y = 0;
@@ -140,6 +117,27 @@ if (keyboard_check(ord("A"))) {
         sprite_index = spr_idle; // Set idle sprite when standing still
     }
 }
+
+if (horizontal_velocity > 0) {
+    if (place_meeting(x + hspeed, y, obj_ground)) { 
+        // If a collision is detected, find the exact position to stop
+        while (!place_meeting(x + 1, y, obj_ground)) {
+            x += 1;
+        }
+        horizontal_velocity = 0; // Stop horizontal movement
+    }
+}
+
+// Check if moving left
+if (horizontal_velocity < 0) {
+    if (place_meeting(x + hspeed, y, obj_ground)) {
+        // If a collision is detected, find the exact position to stop
+        while (!place_meeting(x - 1, y, obj_ground)) {
+            x -= 1;
+        }
+        horizontal_velocity = 0; // Stop horizontal movement
+    }
+}
 /*
 if(place_meeting(x,y,obj_fire) && !dead){
     audio_play_sound(snd_death, false, false);
@@ -165,3 +163,11 @@ if (shake_time < shake_duration) {
     shake_time = 0;
 }
 
+if (dead){
+	death_count += 1;
+	obj_npc.my_text = noone;
+	obj_npc.text_box = noone;
+	dead = false;
+}
+
+show_debug_message(death_count);

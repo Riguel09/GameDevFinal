@@ -28,6 +28,10 @@ shake_duration = 0;
 shake_time = 0;
 
 dead = false;
+death_count = 0;
+
+start_x = x;
+start_y = y;
 
 
 function screen_shake(magnitude, duration){
