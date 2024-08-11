@@ -8,7 +8,16 @@ if (global.first_interaction == false){
 	}
 }
 
-
+else if (global.joke_fall == true && room == rm_level_2){
+	text_box = instance_create_layer(150, room_height - 150, "Instances", obj_text_box);
+	my_text[0] = "I can't believe you actually jumped on the pit!!! If someone asks you jump from a pit do you do it??? I guess you would do it..."
+	text_box.msg = my_text;
+	text_box.page = 0;
+	global.joke_interaction = false;
+	if(keyboard_check(vk_shift)){
+		instance_destroy(box);
+	}
+}
 
 
 

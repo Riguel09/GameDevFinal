@@ -15,7 +15,7 @@ if (falling == true) {
             vertical_velocity = 0;
             
             var floor_instance = instance_place(x, y + vertical_check, obj_ground);
-            y -= vertical_check
+            y = floor_instance.y - sprite_height;
             
             falling = false;
             on_floor = true;
@@ -67,20 +67,6 @@ if (jumping == true) {
     }
 }
 
-if (bouncing == true) {
-    if (bounce_timer < bounce_duration) {
-        vertical_velocity -= bounce_acceleration;
-        if (vertical_velocity < -bounce_max_velocity) vertical_velocity = -bounce_max_velocity;
-        bounce_timer++;
-        sprite_index = spr_jump; // Set jump sprite during bounce
-    } else {
-        bouncing = false;
-        falling = true;
-        sprite_index = spr_fall; // Set fall sprite when bounce ends
-    }
-}
-
-// Apply horizontal movement and handle wall collisions
 
 
 // Ensure player stays within the room boundaries
@@ -138,18 +124,37 @@ if (horizontal_velocity < 0) {
         horizontal_velocity = 0; // Stop horizontal movement
     }
 }
-/*
-if(place_meeting(x,y,obj_fire) && !dead){
+
+if(place_meeting(x,y,obj_death_plane) && !dead){
     audio_play_sound(snd_death, false, false);
-    var ps = part_system_create();
-    part_particles_create(ps, x, y + sprite_height /2, global.particle_type, 100);
-    screen_shake(5, 30);
-    screen_flash();
-    dead = true;
-    alarm[0] = 40;
-    sprite_index = spr_idle; // Set idle sprite on death
+	var ps = part_system_create();
+	part_particles_create(ps, x, y + sprite_height /2, global.particle_type, 100);
+	screen_shake(5, 30);
+	screen_flash();
+	dead = true;
+	alarm[0] = 40;
 }
-*/
+
+if(place_meeting(x,y,obj_hazard) && !dead){
+    audio_play_sound(snd_death, false, false);
+	var ps = part_system_create();
+	part_particles_create(ps, x, y + sprite_height /2, global.particle_type, 100);
+	screen_shake(5, 30);
+	screen_flash();
+	dead = true;
+	alarm[0] = 40;
+}
+
+if(place_meeting(x,y,obj_joke_fall) && !dead){
+    audio_play_sound(snd_death, false, false);
+	var ps = part_system_create();
+	part_particles_create(ps, x, y + sprite_height /2, global.particle_type, 100);
+	screen_shake(5, 30);
+	screen_flash();
+	dead = true;
+	alarm[0] = 40;
+}
+
 // Handle screen shake
 if (shake_time < shake_duration) {
     shake_x = random_range(-shake_magnitude, shake_magnitude);
@@ -163,11 +168,5 @@ if (shake_time < shake_duration) {
     shake_time = 0;
 }
 
-if (dead){
-	death_count += 1;
-	obj_npc.my_text = noone;
-	obj_npc.text_box = noone;
-	dead = false;
-}
 
-show_debug_message(death_count);
+camera_set_view_pos(view_camera[0], camera_get_view_x(view_camera[0]) + shake_x, camera_get_view_y(view_camera[0]) + shake_y);

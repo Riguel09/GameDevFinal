@@ -14,11 +14,7 @@ jump_max_velocity = 7;
 jump_timer = 0;
 jump_duration = 15;
 
-bounce_timer = 0;
-bounce_initial_impulse = 4;
-bounce_acceleration = 2;
-bounce_max_velocity = 10;
-bounce_duration = 15;
+
 
 vertical_velocity = 0;
 horizontal_velocity = 0;
@@ -30,8 +26,17 @@ shake_time = 0;
 dead = false;
 death_count = 0;
 
-start_x = x;
-start_y = y;
+global.particle_type = part_type_create();
+
+part_type_shape(global.particle_type, pt_shape_explosion);
+part_type_size(global.particle_type, 0.01, 0.05, 0, 0.2);
+part_type_color2(global.particle_type, c_red, c_yellow);
+part_type_alpha3(global.particle_type, 0, 0.6, 0);
+part_type_speed(global.particle_type, 1, 3.5, -0.1, 0);
+part_type_direction(global.particle_type, 0, 359, 0, 0.1);
+part_type_life(global.particle_type, 20, 40);
+part_type_blend(global.particle_type, true);
+
 
 
 function screen_shake(magnitude, duration){

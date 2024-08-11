@@ -23,4 +23,35 @@ else if (distance_to_object(obj_player) < interaction_range && keyboard_check_pr
 	text_box.page = 0;
 }
 	
+else if (distance_to_object(obj_player) < interaction_range && keyboard_check_pressed(vk_shift) && text_box == noone && global.death_count == 1 && room == rm_level_2){
+	text_box = instance_create_layer(150, room_height - 150, "Instances", obj_text_box);
+	my_text[0] = "Keep on going, it's not even that bad!!!" 
+	text_box.msg = my_text;
+	text_box.page = 0;
+}
 
+else if (distance_to_object(obj_player) < interaction_range && keyboard_check_pressed(vk_shift) && text_box == noone && global.death_count == 2 && room == rm_level_2){
+	text_box = instance_create_layer(150, room_height - 150, "Instances", obj_text_box);
+	my_text[0] = "Did you like the tricks we made? I even helped with some, they were made with care!!!"
+	text_box.msg = my_text;
+	text_box.page = 0;
+}
+
+else if (distance_to_object(obj_player) < interaction_range && keyboard_check_pressed(vk_shift) && text_box == noone && global.death_count == 3 && room == rm_level_2){
+	text_box = instance_create_layer(150, room_height - 150, "Instances", obj_text_box);
+	my_text[0] = "There are still more to go, but many have come and conquered the challenges!!!"
+	text_box.msg = my_text;
+	text_box.page = 0;
+}
+
+else if (distance_to_object(obj_player) < interaction_range && keyboard_check_pressed(vk_shift) && text_box == noone && global.death_count == 4 && room == rm_level_2){
+	text_box = instance_create_layer(150, room_height - 150, "Instances", obj_text_box);
+	my_text[0] = "This is a test of your spirit, are you gonna give in?"
+	my_text[1] = "Why am I speaking like this? You know I have job, right? And this job requires me to read some preset texts...It's not like I wanna do this..."
+	text_box.msg = my_text;
+	text_box.page = 0;
+}
+
+if (global.joke_interaction == true){
+	global.joke_fall = false;
+}
