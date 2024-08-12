@@ -1,7 +1,7 @@
 {
   "resourceType": "GMProject",
   "resourceVersion": "1.6",
-  "name": "BouncePhysicsStarGenComplete",
+  "name": "Final",
   "resources": [
     {"id":{"name":"snd_jump","path":"sounds/snd_jump/snd_jump.yy",},"order":1,},
     {"id":{"name":"obj_spike_down_move","path":"objects/obj_spike_down_move/obj_spike_down_move.yy",},"order":17,},
