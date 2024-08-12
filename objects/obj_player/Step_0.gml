@@ -35,24 +35,24 @@ if (on_floor == true) {
         on_floor = false;
         jumping = true;
         vertical_velocity = -jump_initial_inpulse;
-        sprite_index = spr_jump; // Set jump sprite
+        sprite_index = spr_jump; 
 		image_speed = 0;
 		image_index = 0;
     }
 }
 
 if (jumping == true) {
-	if (image_index >= 3) { // If we have reached the 4th frame
-        image_speed = 0; // Stop the animation
+	if (image_index >= 3) {
+        image_speed = 0;
     } else {
-        image_speed = 1; // Keep playing the animation
+        image_speed = 1; 
     }
     if (keyboard_check(vk_space)) {
         vertical_velocity -= jump_acceleration;
     } else {
         jumping = false;
         falling = true;
-        sprite_index = spr_fall; // Set fall sprite if not holding space
+        sprite_index = spr_fall;
     }
 
     if (vertical_velocity < -jump_max_velocity) vertical_velocity = -jump_max_velocity;
@@ -63,7 +63,7 @@ if (jumping == true) {
         jumping = false;
         falling = true;
         jump_timer = 0;
-        sprite_index = spr_fall; // Set fall sprite when jump ends
+        sprite_index = spr_fall; 
     }
 }
 
@@ -85,43 +85,41 @@ if (y < 0) {
 facing = 1;
 if (keyboard_check(ord("A"))) {
 	if(on_floor){
-		sprite_index = spr_right; // Set walk left sprite
+		sprite_index = spr_right; 
 	}
     horizontal_velocity = -4;
     facing = -1;
     image_xscale = facing;
 } else if (keyboard_check(ord("D"))) {
 	if(on_floor){
-    sprite_index = spr_right; // Set walk right sprite
+    sprite_index = spr_right;
 	}
     horizontal_velocity = 4;
     facing = 1;
-    image_xscale = facing; // Face right
+    image_xscale = facing; 
 } else {
     horizontal_velocity = 0;
     if (on_floor) {
-        sprite_index = spr_idle; // Set idle sprite when standing still
+        sprite_index = spr_idle;
     }
 }
 
 if (horizontal_velocity > 0) {
     if (place_meeting(x + hspeed, y, obj_ground)) { 
-        // If a collision is detected, find the exact position to stop
         while (!place_meeting(x + 1, y, obj_ground)) {
             x += 1;
         }
-        horizontal_velocity = 0; // Stop horizontal movement
+        horizontal_velocity = 0; 
     }
 }
 
 // Check if moving left
 if (horizontal_velocity < 0) {
     if (place_meeting(x + hspeed, y, obj_ground)) {
-        // If a collision is detected, find the exact position to stop
         while (!place_meeting(x - 1, y, obj_ground)) {
             x -= 1;
         }
-        horizontal_velocity = 0; // Stop horizontal movement
+        horizontal_velocity = 0;
     }
 }
 
@@ -169,4 +167,3 @@ if (shake_time < shake_duration) {
 }
 
 
-camera_set_view_pos(view_camera[0], camera_get_view_x(view_camera[0]) + shake_x, camera_get_view_y(view_camera[0]) + shake_y);
