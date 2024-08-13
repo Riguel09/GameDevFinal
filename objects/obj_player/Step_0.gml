@@ -10,7 +10,7 @@ if (falling == true) {
 
     var vertical_check = 5;
 
-    if (vertical_velocity > 0) { // Moving downwards
+    if (vertical_velocity > 0) { 
         if (place_meeting(x, y + vertical_check, obj_ground)) {
             vertical_velocity = 0;
             
@@ -43,22 +43,16 @@ if (jumping == true) {
         image_speed = 1;
     }
 
-    // Check for upward movement collisions
-    if (vertical_velocity < 0) { // Moving upwards
+    if (vertical_velocity < 0) {
         if (place_meeting(x, y + vertical_velocity, obj_ground)) {
             // Stop upward movement
             vertical_velocity = 0;
-
-            // Find the instance of the object we're colliding with
             var ceiling_instance = instance_place(x, y + vertical_velocity, obj_ground);
             
-            // Ensure that the instance exists before accessing its properties
             if (ceiling_instance != noone) {
-                // Adjust position to just below the object hit from below
                 y = ceiling_instance.y + ceiling_instance.sprite_height;
             }
 
-            // Transition to falling state
             jumping = false;
             falling = true;
             sprite_index = spr_fall;
