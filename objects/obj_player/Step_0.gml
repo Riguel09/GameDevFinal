@@ -20,12 +20,7 @@ if (falling == true) {
             falling = false;
             on_floor = true;
         } 
-    } else { // Moving upwards
-        if (place_meeting(x, y + vertical_velocity, obj_ground)) {
-            vertical_velocity = 0;
-            y -= vertical_check; 
-        } 
-    }
+    } 
 }
 
 // Handle jumping logic
@@ -42,11 +37,34 @@ if (on_floor == true) {
 }
 
 if (jumping == true) {
-	if (image_index >= 3) {
+    if (image_index >= 3) {
         image_speed = 0;
     } else {
-        image_speed = 1; 
+        image_speed = 1;
     }
+
+    // Check for upward movement collisions
+    if (vertical_velocity < 0) { // Moving upwards
+        if (place_meeting(x, y + vertical_velocity, obj_ground)) {
+            // Stop upward movement
+            vertical_velocity = 0;
+
+            // Find the instance of the object we're colliding with
+            var ceiling_instance = instance_place(x, y + vertical_velocity, obj_ground);
+            
+            // Ensure that the instance exists before accessing its properties
+            if (ceiling_instance != noone) {
+                // Adjust position to just below the object hit from below
+                y = ceiling_instance.y + ceiling_instance.sprite_height;
+            }
+
+            // Transition to falling state
+            jumping = false;
+            falling = true;
+            sprite_index = spr_fall;
+        }
+    }
+
     if (keyboard_check(vk_space)) {
         vertical_velocity -= jump_acceleration;
     } else {
@@ -63,10 +81,9 @@ if (jumping == true) {
         jumping = false;
         falling = true;
         jump_timer = 0;
-        sprite_index = spr_fall; 
+        sprite_index = spr_fall;
     }
 }
-
 
 
 // Ensure player stays within the room boundaries
