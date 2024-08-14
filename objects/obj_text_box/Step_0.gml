@@ -8,5 +8,8 @@ if(keyboard_check_pressed(vk_enter)){
 	}
 }
 
-
+if (spawn_exit == true && page == 1 && spawned = false){
+	instance_create_layer(400, 512, "Instances", obj_exit);
+	spawned = true;
+}
 

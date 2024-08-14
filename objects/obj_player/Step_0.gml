@@ -19,8 +19,22 @@ if (falling == true) {
             
             falling = false;
             on_floor = true;
-        } 
-    } 
+        }  
+		else if (place_meeting(x, y + vertical_check, obj_enemy)) {
+            var enemy_instance = instance_place(x, y + vertical_check, obj_enemy);
+            vertical_velocity = -bounce_initial_impulse; // Bounce effect
+            bouncing = true;
+            bounce_timer = 0;
+            
+            // Create particles and screen shake effect
+			audio_play_sound(snd_bounce, false, false);
+            var ps = part_system_create();
+            part_particles_create(ps, x, y + 72, global.particle_type, 100);
+            screen_shake(5, 30);
+            screen_flash();
+            instance_destroy(enemy_instance); // Destroy enemy
+		}
+	}
 }
 
 // Handle jumping logic
@@ -44,7 +58,7 @@ if (jumping == true) {
     }
 
     if (vertical_velocity < 0) {
-        if (place_meeting(x, y + vertical_velocity, obj_ground)) {
+        if (place_meeting(x + horizontal_velocity, y + vertical_velocity, obj_ground)) {
             // Stop upward movement
             vertical_velocity = 0;
             var ceiling_instance = instance_place(x, y + vertical_velocity, obj_ground);
@@ -79,6 +93,16 @@ if (jumping == true) {
     }
 }
 
+if (bouncing == true) {
+    if (bounce_timer < bounce_duration) {
+        vertical_velocity -= bounce_acceleration;
+        if (vertical_velocity < -bounce_max_velocity) vertical_velocity = -bounce_max_velocity;
+        bounce_timer++;
+    } else {
+        bouncing = false;
+        falling = true;
+    }
+}
 
 // Ensure player stays within the room boundaries
 if (x < 0) {

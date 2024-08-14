@@ -146,6 +146,7 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_5C2432A6","properties":[
             {"resourceType":"GMOverriddenProperty","resourceVersion":"1.0","name":"","propertyId":{"name":"next_level","path":"objects/obj_level_change/obj_level_change.yy",},"objectId":{"name":"obj_level_change","path":"objects/obj_level_change/obj_level_change.yy",},"value":"rm_over",},
           ],"isDnd":false,"objectId":{"name":"obj_level_change","path":"objects/obj_level_change/obj_level_change.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.5,"scaleY":3.5,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":1920.0,"y":480.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_2E32C3DD","properties":[],"isDnd":false,"objectId":{"name":"obj_triangle","path":"objects/obj_triangle/obj_triangle.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":272.0,"y":64.0,},
       ],"visible":true,"depth":0,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritVisibility":true,"inheritSubLayers":true,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"effectEnabled":true,"effectType":null,"properties":[],},
     {"resourceType":"GMRBackgroundLayer","resourceVersion":"1.0","name":"Background","spriteId":null,"colour":4294942976,"x":0,"y":0,"htiled":false,"vtiled":false,"hspeed":0.0,"vspeed":0.0,"stretch":false,"animationFPS":15.0,"animationSpeedType":0,"userdefinedAnimFPS":false,"visible":true,"depth":100,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritVisibility":true,"inheritSubLayers":true,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"effectEnabled":true,"effectType":null,"properties":[],},
   ],
@@ -268,6 +269,7 @@
     {"name":"inst_4D9E2DC9","path":"rooms/rm_level_2/rm_level_2.yy",},
     {"name":"inst_6DECAFE","path":"rooms/rm_level_2/rm_level_2.yy",},
     {"name":"inst_5C2432A6","path":"rooms/rm_level_2/rm_level_2.yy",},
+    {"name":"inst_2E32C3DD","path":"rooms/rm_level_2/rm_level_2.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,
